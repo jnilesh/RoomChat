@@ -6,7 +6,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 function Chat() {
     return (
-        <div class="chat" >
+        <div className="chat" >
             <div className="chat__header">
                 <Avatar />
 
@@ -54,7 +54,10 @@ function Chat() {
                     <button 
                     // onClick={sendMessage} 
                     type="submit">
-                        <IconButton > <SendIcon /> </IconButton></button>
+                        {/* <IconButton >  */}
+                            <SendIcon /> 
+                            {/* </IconButton> */}
+                            </button>
 
 
                 </form>
