@@ -4,26 +4,16 @@ import Sidebar from './Sidebar';
 import Chat from './Chat';
 import Pusher from "pusher-js"
 import axios from './axios'
-import Login from './components/Login';
-import { useStateValue } from './ContextApi/StateProvider';
 
 function App() {
 
-  const [{ user }, dispatch] = useStateValue();
-  const [messages, setMessages] = useState([]);
-  const [rooms, setRooms] = useState([])
+  const [messages, setMessages] = useState([])
 
   useEffect(() => {
     axios.get('/messages/sync')
     .then(response => {
       console.log(response.data);
       setMessages(response.data)
-    })
-
-    axios.get('/rooms')
-    .then(response => {
-      console.log(response.data);
-      setRooms(response.data)
     })
   }, [])
 
@@ -50,17 +40,12 @@ function App() {
 
   return (
     <div className="app">
-      {!user ? (
-        <Login />
-      ) : (
       <div className="app__body">
-        <Sidebar rooms={rooms} />
+        <Sidebar />
         <Chat messages={messages}/>
       </div>
-      )}
-    </div>
       
-    
+    </div>
   );
 }
 
