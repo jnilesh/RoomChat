@@ -25,6 +25,7 @@
     text-transform: inherit !important;
     background-color: #0a8d48;
     color: white;
+    padding: 10px;
   }
   
   .login__container button:hover {

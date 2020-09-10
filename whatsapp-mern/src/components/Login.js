@@ -30,7 +30,7 @@ const Login = () => {
           alt=""
         />
         <div className="login__text">
-          <h1>Sign in to WhatsApp Clone</h1>
+          <h1>Sign in to ChatRoom</h1>
         </div>
         <Button type="submit" onClick={signIn}>
           Sign in with Google

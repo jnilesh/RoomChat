@@ -26,9 +26,8 @@ function Sidebar({ rooms }) {
 
             <div className="sidebar__chats">
                 {rooms.map((room) => (
-                    <SidebarChat name={room.name} description={room.description} />
+                    <SidebarChat key={room._id} fullRoom={room} name={room.name} id={room._id} description={room.description} />
                 ))}
-                <SidebarChat />
             </div>
 
         </div>

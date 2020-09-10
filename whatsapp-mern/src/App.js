@@ -9,12 +9,19 @@ import { useStateValue } from './ContextApi/StateProvider';
 
 function App() {
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user,room }, dispatch] = useStateValue();
+
   const [messages, setMessages] = useState([]);
   const [rooms, setRooms] = useState([])
 
   useEffect(() => {
-    axios.get('/messages/sync')
+    // axios.get('/messages/sync')
+    // .then(response => {
+    //   console.log(response.data);
+    //   setMessages(response.data)
+    // })
+
+    axios.get('/chats/' + room)
     .then(response => {
       console.log(response.data);
       setMessages(response.data)
@@ -25,7 +32,7 @@ function App() {
       console.log(response.data);
       setRooms(response.data)
     })
-  }, [])
+  }, [room])
 
   useEffect(() => {
     // Pusher.logToConsole  = true;
@@ -34,7 +41,7 @@ function App() {
       cluster: 'ap2'
     });
 
-    const channel = pusher.subscribe('messages');
+    const channel = pusher.subscribe(`token-${room}`);
     channel.bind('inserted', (newMessage) => {
       // alert(JSON.stringify(newMessage));
       setMessages([...messages, newMessage])
@@ -44,7 +51,7 @@ function App() {
       channel.unbind_all();
       channel.unsubscribe();
     }
-  }, [messages])
+  }, [messages,room])
 
   console.log(messages);
 

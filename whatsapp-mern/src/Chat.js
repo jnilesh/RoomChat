@@ -7,17 +7,16 @@ import axios from './axios'
 import { useStateValue } from './ContextApi/StateProvider';
 
 function Chat({messages}) {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user,room,roomVar }, dispatch] = useStateValue();
     const [input, setInput] = useState("");
 
     const sendMessage = async (e) => {
         e.preventDefault();
 
-        await axios.post('/messages/new',{
+        await axios.post(('/chats/' + room ),{
             message: input,
             name: user.displayName,
-            timestamp: new Date().toLocaleString(),
-            received: true,
+            author: user.uid
     
         });
 
@@ -30,8 +29,8 @@ function Chat({messages}) {
                 <Avatar />
 
                 <div className="chat__headerInfo">
-                    <h3>Room Name</h3>
-                    <p>Last seen at ...</p>
+                    <h3>{roomVar.name ? roomVar.name : "something"}</h3>
+                    <p>created by {roomVar.creator && roomVar.creator}</p>
                 </div>
 
                 <div className="chat__headerRight">
@@ -43,7 +42,7 @@ function Chat({messages}) {
             <div className="chat__body">
 
                 {messages.map((message)=> (
-                    <p className={`chat__message ${user.displayName==message.name && "chat__reciever"}`} > 
+                    <p key={message._id} className={`chat__message ${user.displayName===message.name && "chat__reciever"}`} > 
                     <span className="chat__name" >
                         {message.name}
                     </span>
@@ -51,7 +50,7 @@ function Chat({messages}) {
                     {message.message}
                     
                     <span className="chat__timestamp" >
-                        {message.timestamp}
+                        {message.updatedAt}
                     </span>
                     </p>
                 ))}
