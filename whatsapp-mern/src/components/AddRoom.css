@@ -1,0 +1,95 @@
+.sidebar__addNew {
+    display: flex;
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.sidebar__addNew:hover {
+    background-color: #ebebeb;
+     
+}
+
+.sidebar__addNew > h3 {
+    font-size: 25px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.sidebar__addNew > .MuiSvgIcon-root {
+    color: gray;
+}
+
+.sidebar__addNew:hover .MuiSvgIcon-root {
+    color: green;
+    /* padding: 10px; */
+}
+
+.sidebar__modal {
+    
+}
+
+.modal_paper{
+    background-color: white;
+    border-radius: 20px;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    padding: 40px;
+    outline-width: 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.664), 0 6px 20px 0 rgba(0, 0, 0, 0.7);
+    /* padding: theme.spacing(2, 4, 3); */
+   
+}
+
+.modal_paper > h2 {
+    position: relative;
+    left: 25%;
+}
+
+.modal_form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    outline-width: 0;
+    
+}
+
+.modal_form > input {
+    flex: 1;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid green;
+    outline-width: 0;
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.modal_form > textarea {
+    flex: 1;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid green;
+    outline-width: 0;
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.modal_form > button {
+    border: none;
+    outline-width: 0;
+    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 20px;
+    transition: all 300ms;
+    background-color:rgb(53, 231, 53) !important;
+}
+
+.modal_form > button:hover {
+    background-color: rgba(144, 238, 144, 0.795) !important;
+    transform: scale(1.1)
+}

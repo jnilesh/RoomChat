@@ -69,6 +69,13 @@
     border-top: 1px solid lightgray;
 }
 
+/* .chat__footer > .MuiSvgIcon-root {
+    color: gray;
+    transition: all 300ms;
+    cursor: pointer;
+    margin-left: 2px;
+} */
+
 .chat__footer > form {
     flex: 1;
     display: flex;
@@ -93,7 +100,21 @@
     outline-width: 0;
 }
 
-.chat__footer > .MuiSvgIcon-root {
+.chat__footer__send {
     padding: 10px;
     color: gray;
+    cursor: pointer;
+}
+
+.chat__footer__send > .MuiSvgIcon-root {
+    color: gray;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.chat__footer__send > .MuiSvgIcon-root:hover {
+    color: green;
+    transform: scale(1.2) rotate(-45deg);
+    /* transform: rotate(-45deg); */
+
 }

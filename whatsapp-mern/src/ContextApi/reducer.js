@@ -1,10 +1,13 @@
 
 export const initialState = {
     user: null,
-    room: "5f5a0fee4e106b0a7cb5419c",
+    room: "5f5b78218e7d7e1a3000d915",
     roomVar: {
       name: "Default Room",
-      creator: "Nilesh Jain"
+      creator: {
+        name: "Nilesh",
+        uid: "Admin"
+      }
     }
   };
   

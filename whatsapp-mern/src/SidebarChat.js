@@ -25,15 +25,15 @@ function SidebarChat({ fullRoom,name,description,id }) {
             type: actionTypes.SET_ROOMVAR,
             roomVar: fullRoom,
           });
-        console.log("selected room is " + id + " " + room );
+        console.log("selected room is " + fullRoom.id + " = " + room );
       };
 
     return (
         <div onClick={selectRoom} className="sidebarChat">
-            <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+            <Avatar src={`https://avatars.dicebear.com/api/human/${fullRoom.creator.uid}.svg`} />
             <div className="sidebarChat__info">
-                <h2>{name}</h2>
-                <p>{description}</p>
+                <h2>{fullRoom.name}</h2>
+                <p>{fullRoom.description}</p>
             </div>
             
         </div>

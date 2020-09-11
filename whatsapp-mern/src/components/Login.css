@@ -26,8 +26,10 @@
     background-color: #0a8d48;
     color: white;
     padding: 10px;
+    transition: all 300ms;
   }
   
   .login__container button:hover {
     background-color: lightgreen !important;
+    transform: scale(1.2)
   }

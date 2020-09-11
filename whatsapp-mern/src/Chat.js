@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Chat.css'
-import { Avatar } from '@material-ui/core'
+import { Avatar, IconButton, Tooltip } from '@material-ui/core'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import SendIcon from '@material-ui/icons/Send';
 import axios from './axios'
@@ -10,13 +10,23 @@ function Chat({messages}) {
     const [{ user,room,roomVar }, dispatch] = useStateValue();
     const [input, setInput] = useState("");
 
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(scrollToBottom, [messages]);
+
     const sendMessage = async (e) => {
         e.preventDefault();
 
         await axios.post(('/chats/' + room ),{
             message: input,
-            name: user.displayName,
-            author: user.uid
+            author: {
+                name: user.displayName,
+                uid : user.uid
+            }
     
         });
 
@@ -26,11 +36,11 @@ function Chat({messages}) {
     return (
         <div className="chat" >
             <div className="chat__header">
-                <Avatar />
+                <Avatar src={`https://avatars.dicebear.com/api/human/${roomVar.creator.uid}.svg`}/>
 
                 <div className="chat__headerInfo">
                     <h3>{roomVar.name ? roomVar.name : "something"}</h3>
-                    <p>created by {roomVar.creator && roomVar.creator}</p>
+                    <p>created by {roomVar.creator.name && roomVar.creator.name}</p>
                 </div>
 
                 <div className="chat__headerRight">
@@ -39,41 +49,45 @@ function Chat({messages}) {
 
             </div>
 
-            <div className="chat__body">
+            <div className="chat__body" >
 
                 {messages.map((message)=> (
-                    <p key={message._id} className={`chat__message ${user.displayName===message.name && "chat__reciever"}`} > 
+                    < React.Fragment key={message._id}>
+                    <p key={message._id} className={`chat__message ${user.uid===message.author.uid && "chat__reciever"}`} > 
                     <span className="chat__name" >
-                        {message.name}
+                        {message.author.name}
                     </span>
                     
                     {message.message}
                     
                     <span className="chat__timestamp" >
-                        {message.updatedAt}
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit', hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(message.updatedAt)))}
+                        {/* {message.updatedAt} */}
                     </span>
                     </p>
-                ))}
+                    </React.Fragment>
+                ))};
 
+                <div ref={messagesEndRef}></div>
             
             </div>
 
             <div className="chat__footer">
+                <IconButton>
                 <InsertEmoticonIcon />
-                <form>
+                </IconButton>
+                
+                <form onSubmit={sendMessage}>
                     <input value={input} 
                     onChange={e => setInput(e.target.value)}
+                    required
                     type="text" placeholder="Type a message"/>
-                    <button 
-                    // onClick={sendMessage} 
-                    onClick={sendMessage}
+                    <button className="chat__footer__send"
                     type="submit">
-                        {/* <IconButton >  */}
+                            <Tooltip title="Send">
                             <SendIcon /> 
-                            {/* </IconButton> */}
+                            </Tooltip>
                             </button>
-
-
                 </form>
 
             </div>

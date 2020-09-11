@@ -12,14 +12,8 @@ function App() {
   const [{ user,room }, dispatch] = useStateValue();
 
   const [messages, setMessages] = useState([]);
-  const [rooms, setRooms] = useState([])
 
   useEffect(() => {
-    // axios.get('/messages/sync')
-    // .then(response => {
-    //   console.log(response.data);
-    //   setMessages(response.data)
-    // })
 
     axios.get('/chats/' + room)
     .then(response => {
@@ -27,15 +21,10 @@ function App() {
       setMessages(response.data)
     })
 
-    axios.get('/rooms')
-    .then(response => {
-      console.log(response.data);
-      setRooms(response.data)
-    })
   }, [room])
 
   useEffect(() => {
-    // Pusher.logToConsole  = true;
+    // Pusher.logToConsole  = true; s
 
     const pusher = new Pusher('2dc823cb13284cd07f68', {
       cluster: 'ap2'
@@ -43,8 +32,8 @@ function App() {
 
     const channel = pusher.subscribe(`token-${room}`);
     channel.bind('inserted', (newMessage) => {
-      // alert(JSON.stringify(newMessage));
       setMessages([...messages, newMessage])
+      console.log(messages);
     });
 
     return () => {
@@ -53,7 +42,7 @@ function App() {
     }
   }, [messages,room])
 
-  console.log(messages);
+  
 
   return (
     <div className="app">
@@ -61,7 +50,7 @@ function App() {
         <Login />
       ) : (
       <div className="app__body">
-        <Sidebar rooms={rooms} />
+        <Sidebar />
         <Chat messages={messages}/>
       </div>
       )}
