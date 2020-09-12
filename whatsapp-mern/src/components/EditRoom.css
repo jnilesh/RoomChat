@@ -1,0 +1,11 @@
+.editRoom_Icon {
+    outline-width: 0;
+    color: gray;
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.editRoom_Icon:hover {
+    color: green;
+    transform: scale(1.2) rotate(-45deg);
+}

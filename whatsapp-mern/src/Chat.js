@@ -5,6 +5,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import SendIcon from '@material-ui/icons/Send';
 import axios from './axios'
 import { useStateValue } from './ContextApi/StateProvider';
+import EditRoom from './components/EditRoom';
 
 function Chat({messages}) {
     const [{ user,roomVar }, dispatch] = useStateValue();
@@ -44,7 +45,7 @@ function Chat({messages}) {
                 </div>
 
                 <div className="chat__headerRight">
-
+                    <EditRoom />
                 </div>
 
             </div>
