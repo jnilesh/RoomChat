@@ -10,7 +10,7 @@ import Pusher from 'pusher-js'
 
 
 function Sidebar() {
-    const [{ user,room }, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const [rooms, setRooms] = useState([])    
 
     useEffect(() => {
@@ -67,7 +67,7 @@ function Sidebar() {
                 <AddRoom />
 
                 {rooms.map((room) => (
-                    <SidebarChat key={room._id} fullRoom={room} name={room.name} id={room._id} description={room.description} />
+                    <SidebarChat key={room._id} fullRoom={room} />
                 ))}
             </div>
 

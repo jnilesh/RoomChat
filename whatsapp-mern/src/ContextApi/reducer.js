@@ -1,8 +1,9 @@
 
 export const initialState = {
     user: null,
-    room: "5f5b78218e7d7e1a3000d915",
+    // room: "5f5b78218e7d7e1a3000d915",
     roomVar: {
+      _id: "5f5b78218e7d7e1a3000d915",
       name: "Default Room",
       creator: {
         name: "Nilesh",
@@ -13,7 +14,7 @@ export const initialState = {
   
   export const actionTypes = {
     SET_USER: "SET_USER",
-    SET_ROOM: "SET_ROOM",
+    // SET_ROOM: "SET_ROOM",
     SET_ROOMVAR:"SET_ROOMVAR"
   };
   
@@ -21,8 +22,8 @@ export const initialState = {
     switch (action.type) {
       case actionTypes.SET_USER:
         return { ...state, user: action.user };
-      case actionTypes.SET_ROOM:
-        return { ...state, room: action.room };
+      // case actionTypes.SET_ROOM:
+        // return { ...state, room: action.room };
       case actionTypes.SET_ROOMVAR:
         return { ...state, roomVar: action.roomVar };
       default:

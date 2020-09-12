@@ -9,19 +9,19 @@ import { useStateValue } from './ContextApi/StateProvider';
 
 function App() {
 
-  const [{ user,room }, dispatch] = useStateValue();
+  const [{ user,roomVar }, dispatch] = useStateValue();
 
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
 
-    axios.get('/chats/' + room)
+    axios.get('/chats/' + roomVar._id)
     .then(response => {
       console.log(response.data);
       setMessages(response.data)
     })
 
-  }, [room])
+  }, [roomVar._id])
 
   useEffect(() => {
     // Pusher.logToConsole  = true; s
@@ -30,7 +30,7 @@ function App() {
       cluster: 'ap2'
     });
 
-    const channel = pusher.subscribe(`token-${room}`);
+    const channel = pusher.subscribe(`token-${roomVar._id}`);
     channel.bind('inserted', (newMessage) => {
       setMessages([...messages, newMessage])
       console.log(messages);
@@ -40,7 +40,7 @@ function App() {
       channel.unbind_all();
       channel.unsubscribe();
     }
-  }, [messages,room])
+  }, [messages,roomVar._id])
 
   
 

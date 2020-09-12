@@ -7,7 +7,7 @@ import axios from './axios'
 import { useStateValue } from './ContextApi/StateProvider';
 
 function Chat({messages}) {
-    const [{ user,room,roomVar }, dispatch] = useStateValue();
+    const [{ user,roomVar }, dispatch] = useStateValue();
     const [input, setInput] = useState("");
 
     const messagesEndRef = useRef(null)
@@ -21,7 +21,7 @@ function Chat({messages}) {
     const sendMessage = async (e) => {
         e.preventDefault();
 
-        await axios.post(('/chats/' + room ),{
+        await axios.post(('/chats/' + roomVar._id ),{
             message: input,
             author: {
                 name: user.displayName,
@@ -36,7 +36,7 @@ function Chat({messages}) {
     return (
         <div className="chat" >
             <div className="chat__header">
-                <Avatar src={`https://avatars.dicebear.com/api/human/${roomVar.creator.uid}.svg`}/>
+                <Avatar src={`https://avatars.dicebear.com/api/human/${roomVar.creator.uid}${roomVar._id}.svg`}/>
 
                 <div className="chat__headerInfo">
                     <h3>{roomVar.name ? roomVar.name : "something"}</h3>
